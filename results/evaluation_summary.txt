@@ -1,0 +1,18 @@
+SmartParking-RL Evaluation Summary
+===================================
+
+RL Allocation Metrics
+- Average reward: 90.73
+- Average wait time: 2.28
+- Occupancy rate: 0.47
+
+Baseline First-Available Metrics
+- Average reward: 86.99
+- Average wait time: 2.35
+- Occupancy rate: 0.47
+
+Comparison
+- Reward difference (RL - baseline): 3.74
+- Wait time difference (RL - baseline): -0.07
+- Occupancy difference (RL - baseline): 0.00
+- RL has lower average wait time than the baseline.

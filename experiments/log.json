@@ -1,0 +1,9 @@
+{
+    "avg_reward": 91.0,
+    "avg_wait_time": 2.51,
+    "occupancy_rate": 0.49,
+    "epsilon": 0.05,
+    "alpha": 0.1,
+    "gamma": 0.0,
+    "episodes": 5000
+}
