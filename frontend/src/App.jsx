@@ -1,39 +1,88 @@
+import { useState } from "react"
+
 export default function App() {
-  const slots = [1, 0, 1, 1, 0, 0, 1, 0]
+  const [slots, setSlots] = useState([
+    { id: "S1", occupied: true },
+    { id: "S2", occupied: false },
+    { id: "S3", occupied: true },
+    { id: "S4", occupied: false },
+    { id: "S5", occupied: false },
+    { id: "S6", occupied: true }
+  ])
+
+  const [cars, setCars] = useState(["CAR101"])
+
+  const addCar = () => {
+    const nextCar = `CAR${101 + cars.length}`
+
+    setCars([...cars, nextCar])
+
+    const updatedSlots = [...slots]
+
+    const freeSlot = updatedSlots.find(
+      slot => !slot.occupied
+    )
+
+    if (freeSlot) {
+      freeSlot.occupied = true
+      setSlots(updatedSlots)
+    }
+  }
 
   return (
     <div style={{ padding: "20px" }}>
       <h1>ParkWise RL Dashboard</h1>
 
-      <button>Add Car</button>
+      <button onClick={addCar}>
+        Add Car
+      </button>
 
       <h2>Parking Slots</h2>
 
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(4, 60px)",
-          gap: "10px",
-          marginTop: "20px"
+          gridTemplateColumns: "repeat(3, 120px)",
+          gap: "10px"
         }}
       >
-        {slots.map((slot, index) => (
+        {slots.map(slot => (
           <div
-            key={index}
+            key={slot.id}
             style={{
-              width: "60px",
-              height: "60px",
-              background: slot ? "red" : "green"
+              padding: "20px",
+              background: slot.occupied
+                ? "red"
+                : "green"
             }}
-          />
+          >
+            {slot.id}
+            <br />
+            {slot.occupied
+              ? "Occupied"
+              : "Free"}
+          </div>
         ))}
       </div>
 
+      <h2>Incoming Cars</h2>
+
+      {cars.map(car => (
+        <p key={car}>{car}</p>
+      ))}
+
       <h2>Metrics</h2>
 
-      <p>Reward: 120</p>
-      <p>Occupancy: 75%</p>
-      <p>Wait Time: 4s</p>
+      <p>
+        Occupancy:
+        {
+          slots.filter(
+            slot => slot.occupied
+          ).length
+        }
+        /
+        {slots.length}
+      </p>
     </div>
   )
 }
